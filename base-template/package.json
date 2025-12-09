@@ -1,0 +1,48 @@
+{
+  "name": "fhevm-example",
+  "version": "1.0.0",
+  "description": "FHEVM Example - Hardhat Template",
+  "main": "index.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:zama": "hardhat run scripts/deploy.ts --network zama",
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
+    "node": "hardhat node",
+    "clean": "hardhat clean",
+    "coverage": "hardhat coverage"
+  },
+  "devDependencies": {
+    "@fhevm/hardhat-plugin": "0.0.1-3",
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.0",
+    "@typechain/ethers-v6": "^11.1.2",
+    "@typechain/hardhat": "^9.1.0",
+    "@types/chai": "^4.2.0",
+    "@types/mocha": ">=9.1.0",
+    "chai": "^4.2.0",
+    "dotenv": "^16.0.3",
+    "ethers": "^6.7.1",
+    "hardhat": "^2.24.3",
+    "hardhat-gas-reporter": "^1.0.8",
+    "solidity-coverage": "^0.8.0",
+    "ts-node": ">=8.0.0",
+    "typechain": "^8.3.2",
+    "typescript": ">=4.5.0"
+  },
+  "dependencies": {
+    "fhevm": "^0.5.0"
+  },
+  "keywords": [
+    "fhevm",
+    "homomorphic-encryption",
+    "privacy",
+    "blockchain",
+    "solidity"
+  ],
+  "author": "FHEVM Community",
+  "license": "MIT"
+}
