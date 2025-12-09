@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Virtual Pet - Secret Pet Care</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.0/dist/ethers.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0077be 0%, #00a8e8 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .pet-display {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .pet-avatar {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #0077be, #00d4ff);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pet-avatar::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .pet-stats {
+            margin-top: 20px;
+        }
+
+        .stat-bar {
+            margin: 10px 0;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 20px;
+            background: linear-gradient(90deg, #0088cc, #00d4ff);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .control-section {
+            margin-bottom: 25px;
+        }
+
+        .control-section h3 {
+            color: #555;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #0077be, #00a8e8);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(45deg, #0088cc, #00d4ff);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ff9800, #ffc107);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #f44336, #e91e63);
+            color: white;
+        }
+
+        .wallet-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0077be;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .preset-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .preset-card {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .preset-card:hover {
+            border-color: #0077be;
+            background: #e0f7ff;
+        }
+
+        .preset-card.selected {
+            border-color: #0077be;
+            background: #e0f7ff;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .pet-avatar {
+                width: 150px;
+                height: 150px;
+                font-size: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐾 Privacy Virtual Pet</h1>
+            <p>Care for your secret companion with encrypted blockchain transactions</p>
+        </div>
+
+        <div class="wallet-section">
+            <h3>🔐 Wallet Connection</h3>
+            <button id="connectWallet" class="btn btn-primary">Connect Wallet</button>
+            <div id="walletInfo" class="hidden">
+                <p><strong>Connected:</strong> <span id="walletAddress"></span></p>
+                <p><strong>Network:</strong> <span id="networkName"></span></p>
+            </div>
+        </div>
+
+        <div id="statusDiv"></div>
+
+        <div class="main-content">
+            <div class="pet-display">
+                <h2>Your Virtual Pet</h2>
+                <div class="pet-avatar" id="petAvatar">🐱</div>
+                <h3 id="petName">Whiskers</h3>
+                <div class="pet-stats">
+                    <div>
+                        <label>Happiness:</label>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" id="happinessBar" style="width: 75%">75%</div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Health:</label>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" id="healthBar" style="width: 80%">80%</div>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Energy:</label>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" id="energyBar" style="width: 60%">60%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-section">
+                    <h3>🎮 Pet Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-success" onclick="feedPet()">🍎 Feed</button>
+                        <button class="btn btn-primary" onclick="playWithPet()">🎾 Play</button>
+                        <button class="btn btn-warning" onclick="healPet()">💊 Heal</button>
+                        <button class="btn btn-info" onclick="restPet()">😴 Rest</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>🎨 Pet Customization</h3>
+                    <div class="preset-options">
+                        <div class="preset-card" onclick="selectPetType('cat')">
+                            <div style="font-size: 2rem;">🐱</div>
+                            <p>Cat</p>
+                        </div>
+                        <div class="preset-card" onclick="selectPetType('dog')">
+                            <div style="font-size: 2rem;">🐶</div>
+                            <p>Dog</p>
+                        </div>
+                        <div class="preset-card" onclick="selectPetType('rabbit')">
+                            <div style="font-size: 2rem;">🐰</div>
+                            <p>Rabbit</p>
+                        </div>
+                        <div class="preset-card" onclick="selectPetType('bird')">
+                            <div style="font-size: 2rem;">🐦</div>
+                            <p>Bird</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>🔒 Privacy Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="encryptPetData()">🔐 Encrypt Data</button>
+                        <button class="btn btn-success" onclick="shareSecretly()">🤐 Secret Share</button>
+                        <button class="btn btn-warning" onclick="hidePetStats()">👁️ Hide Stats</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>⚙️ Advanced Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-warning" onclick="petApp.applyTimeDecay()">⏱️ Time Decay</button>
+                        <button class="btn btn-danger" onclick="petApp.resetPet()">🔄 Reset Pet</button>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3>🔧 Debug Tools</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="petApp.checkContractStatus()">📋 Check Contract</button>
+                        <button class="btn btn-success" onclick="petApp.forceCreatePet()">🆕 Force Create Pet</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Powered by FHE (Fully Homomorphic Encryption) on Blockchain</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
