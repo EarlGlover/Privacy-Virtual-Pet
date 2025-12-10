@@ -2,6 +2,8 @@
 
 A comprehensive FHEVM (Fully Homomorphic Encryption Virtual Machine) example hub and production-grade virtual pet application demonstrating practical privacy-preserving patterns on blockchain.
 
+[Privacy Virtual Pet.mp4](https://streamable.com/1w1fvd)
+
 ## Overview
 
 Privacy Virtual Pet is a dual-purpose submission to the Zama Bounty Program:
