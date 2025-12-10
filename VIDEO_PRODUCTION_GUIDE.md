@@ -18,7 +18,7 @@ This guide provides specifications and recommendations for producing the mandato
 - **File Size**: Under 100MB recommended
 
 ### Narration Script
-- **File**: `NARRATION.txt`
+- **File**: `NARRATION`
 - **Word Count**: 155 words (approximately 1 minute at natural pace)
 - **Language**: English
 - **Tone**: Professional, clear, engaging
@@ -205,7 +205,7 @@ Narration: "Everything is open source, thoroughly documented with fifty thousand
 ```
 video-assets/
 ├── scripts/
-│   ├── NARRATION.txt
+│   ├── NARRATION
 │   └── VIDEO_SCRIPT.md
 ├── recordings/
 │   ├── narration_final.wav
@@ -231,7 +231,7 @@ video-assets/
 Before submission, verify:
 
 - ✅ Video duration is exactly 60 seconds
-- ✅ Audio narration matches script (NARRATION.txt)
+- ✅ Audio narration matches script (NARRATION)
 - ✅ Narration is clear and professional
 - ✅ All visuals are high quality
 - ✅ Application features are demonstrated
@@ -286,7 +286,7 @@ Use this timing guide to synchronize visuals with narration:
 
 ## References
 
-- **Full Narration**: `NARRATION.txt`
+- **Full Narration**: `NARRATION`
 - **Video Script with Notes**: `VIDEO_SCRIPT.md`
 - **Live Application**: https://privacy-virtual-pet-v07.vercel.app/
 - **GitHub Repository**: [Repository URL]
