@@ -23,7 +23,7 @@ Privacy Virtual Pet is a blockchain-based game demonstrating how FHE enables:
 - **Complete data privacy** through encryption on-chain
 - **Computation on encrypted data** without exposing values
 - **User-controlled decryption** ensuring only authorized access
-- **Real-world application patterns** applicable to any privacy-sensitive dApp
+- **Real-world application patterns** applicable to any privacy-sensitive confidential application
 
 ### Key Features
 

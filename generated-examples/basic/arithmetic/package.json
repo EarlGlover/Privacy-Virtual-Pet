@@ -1,0 +1,22 @@
+{
+  "name": "fhevm-example-arithmetic",
+  "version": "1.0.0",
+  "description": "FHEVM Example - Encrypted Arithmetic Operations",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:zama": "hardhat run scripts/deploy.ts --network zama",
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia"
+  },
+  "keywords": [
+    "fhevm",
+    "homomorphic-encryption",
+    "arithmetic",
+    "privacy",
+    "blockchain"
+  ],
+  "author": "FHEVM Community",
+  "license": "MIT"
+}

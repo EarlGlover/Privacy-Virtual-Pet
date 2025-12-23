@@ -1,0 +1,24 @@
+{
+  "name": "fhevm-example-encrypt-multiple",
+  "version": "1.0.0",
+  "description": "FHEVM Example - Encrypting Multiple Values",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:localhost": "hardhat run scripts/deploy.ts --network localhost",
+    "deploy:zama": "hardhat run scripts/deploy.ts --network zama",
+    "deploy:sepolia": "hardhat run scripts/deploy.ts --network sepolia",
+    "node": "hardhat node",
+    "clean": "hardhat clean"
+  },
+  "keywords": [
+    "fhevm",
+    "encryption",
+    "multiple-values",
+    "privacy",
+    "blockchain"
+  ],
+  "author": "FHEVM Community",
+  "license": "MIT"
+}

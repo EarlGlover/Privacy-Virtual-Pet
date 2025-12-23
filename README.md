@@ -2,7 +2,7 @@
 
 A comprehensive FHEVM (Fully Homomorphic Encryption Virtual Machine) example hub and production-grade virtual pet application demonstrating practical privacy-preserving patterns on blockchain.
 
-[Privacy Virtual Pet.mp4](https://streamable.com/1w1fvd)
+[Privacy Virtual Pet.mp4](https://youtu.be/9SJvgmbCxQY)
 
 ## Overview
 
@@ -375,7 +375,7 @@ privacy-virtual-pet/
 │   ├── COMPETITION_DELIVERABLES.md
 │   ├── EXAMPLE_HUB_STATUS.md              ✅ Status & metrics
 │   ├── VIDEO_SCRIPT.md                    Demo script
-│   ├── NARRATION.txt                      Voice recording script
+│   ├── NARRATION                      Voice recording script
 │   ├── VIDEO_PRODUCTION_GUIDE.md          Production instructions
 │   ├── FINAL_SUBMISSION_CHECKLIST.md      Verification checklist
 │   ├── LATEST_UPDATES.md

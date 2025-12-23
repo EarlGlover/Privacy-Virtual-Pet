@@ -1,0 +1,21 @@
+{
+  "name": "fhevm-example-anti-patterns",
+  "version": "1.0.0",
+  "description": "FHEVM Example - Common Mistakes and Anti-Patterns",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy": "hardhat run scripts/deploy.ts",
+    "node": "hardhat node",
+    "clean": "hardhat clean"
+  },
+  "keywords": [
+    "fhevm",
+    "anti-patterns",
+    "best-practices",
+    "security",
+    "education"
+  ],
+  "author": "FHEVM Community",
+  "license": "MIT"
+}

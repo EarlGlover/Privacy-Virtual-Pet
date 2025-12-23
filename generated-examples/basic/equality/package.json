@@ -1,0 +1,12 @@
+{
+  "name": "fhevm-example-comparison",
+  "version": "1.0.0",
+  "description": "FHEVM Example - Encrypted Comparison Operations",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test"
+  },
+  "keywords": ["fhevm", "comparison", "equality", "privacy"],
+  "author": "FHEVM Community",
+  "license": "MIT"
+}
